@@ -1,56 +1,3 @@
-// import React, { useState } from 'react'
-// import {Navbar as HeroUi, NavbarBrand, NavbarContent, NavbarItem} from "@heroui/react";
-// import { NavLink } from 'react-router-dom';
-
-// export default function Navbar() {
-
-//   const [isLogged, setIsLogged] = useState(localStorage.getItem('token')!=null)
-
-
-//   return (
-//     <HeroUi position="static">
-//       <NavbarBrand>
-       
-//         <p className="font-bold text-inherit">Linked In</p>
-//       </NavbarBrand>
-
-      
-      
-
-//       <NavbarContent justify="end">
-
-//         {isLogged  ?  <NavbarItem >
-         
-//           LogOut
-         
-//         </NavbarItem> 
-        
-//       :   
-      
-//       <>
-//         <NavbarItem >
-//           <NavLink to={'/register'}>
-//           Register
-//           </NavLink>
-//         </NavbarItem>
-//        <NavbarItem >
-//           <NavLink to={'/login'}>
-//           Login
-//           </NavLink>
-//         </NavbarItem>
-//       </>}
-      
-      
-       
-//       </NavbarContent>
-//     </HeroUi>
-//   )
-// }
-
-
-
-
-//**************************************************** *
 
 import React, { useEffect, useState } from "react";
 import {
@@ -62,7 +9,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -72,7 +19,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  let {setIsLoggedIn , isLoggedIn}=useContext(AuthContext);
+  let {setIsLoggedIn , isLoggedIn , setUserData}=useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -86,6 +33,7 @@ export default function Navbar() {
   function handleLogout() {
     localStorage.removeItem("token");
     setIsLoggedIn(null)
+    setUserData(null)
     localStorage.removeItem("userName");
     setIsLogged(false);
     setUserName("");
@@ -95,7 +43,7 @@ export default function Navbar() {
   return (
     <HeroUi isBordered position="static">
       <NavbarBrand>
-        <p className="font-bold text-inherit">Linked In</p>
+        <Link to={'/'} className="font-bold text-inherit">Linked In</Link>
       </NavbarBrand>
 
       {/* Desktop Menu */}

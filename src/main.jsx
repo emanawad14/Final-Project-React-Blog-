@@ -4,11 +4,13 @@ import { HeroUIProvider } from "@heroui/react";
 import './index.css'
 import App from './App.jsx'
 import AuthContextProvider, { AuthContext } from './Context/AuthContext.jsx';
+import { Toaster } from 'react-hot-toast';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HeroUIProvider>
       <AuthContextProvider>
+        <Toaster/>
         <App />
       </AuthContextProvider>
 

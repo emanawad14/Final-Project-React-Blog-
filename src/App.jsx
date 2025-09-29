@@ -11,6 +11,7 @@ import Register from './pages/Register'
 import NotFoindPage from './pages/NotFoindPage'
 import ProtectedRoute from './layouts/ProtectedRoute'
 import AuthProtedRoute from './layouts/AuthProtedRoute'
+import AddPosts from './pages/AddPosts'
 
 
 const router=createBrowserRouter(
@@ -24,7 +25,12 @@ const router=createBrowserRouter(
       <ProtectedRoute>
         <Profilepage/>
         </ProtectedRoute>},
-      {path:'postdetails' , element:
+        
+      {path:'addpost' , element:
+      <ProtectedRoute>
+        <AddPosts/>
+        </ProtectedRoute>},
+      {path:'postdetails/:id' , element:
         <ProtectedRoute>
           <PostDetailsPages/>
         </ProtectedRoute>

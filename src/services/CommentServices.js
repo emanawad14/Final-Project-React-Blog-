@@ -73,7 +73,7 @@ import axios from "axios";
 
 
 
- export async function getPostCommentApi( postId) {
+ export async function getPostCommentApi(postId) {
 
    
     try {

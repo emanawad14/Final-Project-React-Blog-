@@ -13,6 +13,8 @@ import { AuthContext } from "../Context/AuthContext";
 import { deletePostApi, updatePostApi } from "../services/PostServices";
 import DropDownPost from "./DropDownPosts";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+
 
 export default function PostCard({ post, commentLimit, callback }) {
   const { userData } = useContext(AuthContext);
@@ -45,21 +47,49 @@ export default function PostCard({ post, commentLimit, callback }) {
     }
   }
 
-  async function handleDelete() {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-    if (!confirmDelete) return;
+  // async function handleDelete() {
+  //   const confirmDelete = window.confirm(
+  //     "Are you sure you want to delete this post?"
+  //   );
+  //   if (!confirmDelete) return;
 
-    const response = await deletePostApi(post.id);
-    if (response.message === "success") {
-      toast.success("Post deleted successfully");
-      await callback();
-    } else {
-      toast.error("Failed to delete post");
+  //   const response = await deletePostApi(post.id);
+  //   if (response.message === "success") {
+  //     toast.success("Post deleted successfully");
+  //     await callback();
+  //   } else {
+  //     toast.error("Failed to delete post");
+  //   }
+  // }
+
+
+
+  async function handleDelete() {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "This action cannot be undone!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+  });
+
+  if (result.isConfirmed) {
+    try {
+      const response = await deletePostApi(post.id);
+      if (response.message === "success") {
+        Swal.fire("Deleted!", "Your post has been deleted.", "success");
+        await callback();
+      } else {
+        Swal.fire("Error!", "Failed to delete post.", "error");
+      }
+    } catch (error) {
+      Swal.fire("Error!", "Something went wrong.", "error");
     }
   }
-
+}
   async function saveEdit() {
     setEditLoading(true);
     const formData = new FormData();
@@ -95,7 +125,7 @@ export default function PostCard({ post, commentLimit, callback }) {
         )}
       </div>
 
-      {/* Body */}
+     
       {isEditing ? (
         <div className="space-y-3">
           <Textarea
@@ -153,10 +183,10 @@ export default function PostCard({ post, commentLimit, callback }) {
         <PostBody body={post.body} image={post.image} />
       )}
 
-      {/* Footer */}
+   
       <PostFooter postId={post.id} commentNumber={comments.length} />
 
-      {/* Comments */}
+     
       <form onSubmit={createComment} className="flex gap-3 mb-4">
         <Input
           value={commentContent}
@@ -168,7 +198,7 @@ export default function PostCard({ post, commentLimit, callback }) {
           isLoading={isloading}
           type="submit"
           disabled={commentContent.length < 2}
-          color="primary"
+       className="bg-[#006d77] text-white hover:bg-[#1e293b]"  
         >
           Add Comment
         </Button>

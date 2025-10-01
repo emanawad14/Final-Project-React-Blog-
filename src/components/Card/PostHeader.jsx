@@ -2,7 +2,8 @@ import React from 'react'
 
 export default function PostHeader({photo, name,data}) {
   return (
-    <div className="flex items-center gap-3 w-full">
+    <div className="flex items-center gap-3 w-full ">
+      
               <img
               onError={(e)=>e.target.src='../../../public/download (1).png'}
                 className="rounded-full w-10 h-10 md:w-12 md:h-12 object-cover"
@@ -14,5 +15,6 @@ export default function PostHeader({photo, name,data}) {
                 <p className="text-xs md:text-sm text-gray-500">{data.split('.',1).join().replace('T',' ')}</p>
               </div>
             </div>
+           
   )
 }

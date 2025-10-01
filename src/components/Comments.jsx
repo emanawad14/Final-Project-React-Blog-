@@ -8,7 +8,7 @@ export default function Comments({ comment, postUserId, callback }) {
   const { userData } = useContext(AuthContext);
 
   return (
-    <div className="p-4 bg-gray-100 -mx-3 -mb-3">
+    <div className="p-4 bg-[#0f172a] text-white rounded-2xl -mx-3 -mb-3">
       <div className="w-full flex items-center justify-between">
         <PostHeader
           photo={comment.commentCreator.photo}

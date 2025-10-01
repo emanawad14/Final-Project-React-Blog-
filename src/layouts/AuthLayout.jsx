@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function AuthLayout() {
   return (
@@ -12,6 +13,7 @@ export default function AuthLayout() {
     <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4">
       <Outlet />
     </div>
+    <Footer/>
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function DropDownPost({ onEdit, onDelete }) {
     <Dropdown>
       <DropdownTrigger>
         <svg
-          className="w-6 cursor-pointer"
+          className="w-6 cursor-pointer outline-0"
           xmlns="http://www.w3.org/2000/svg"
           width="27"
           height="27"

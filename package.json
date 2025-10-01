@@ -18,9 +18,12 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.63.0",
+    "react-hot": "^0.0.1",
     "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.2",
     "tailwindcss": "^4.1.13",
+    "toast": "^0.5.4",
     "zod": "^4.1.11"
   },
   "devDependencies": {

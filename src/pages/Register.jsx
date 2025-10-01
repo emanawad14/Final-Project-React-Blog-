@@ -1,20 +1,16 @@
 import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
-
 import { sendRegister } from "../services/authServices";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { schema } from "../Schema/schemaRegister";
-
-
-
+import registeres from "../../public/Reset password-amico.png";
+import toast from "react-hot-toast" 
 
 export default function Register() {
   const [loading, setloading] = useState(false);
   const [apiError, setApiError] = useState(null);
-
 
   const {
     handleSubmit,
@@ -34,34 +30,36 @@ export default function Register() {
     reValidateMode: "onBlur",
   });
 
-
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   async function signUp(userData) {
-    setloading(true)
-     const response=await sendRegister(userData);
-     console.log(response);
+    setloading(true);
+    const response = await sendRegister(userData);
+    console.log(response);
 
-
-     if (response.message) {
+    if (response.message) {
       localStorage.setItem("userName", userData.name);
-      navigate('/login')
-     }
-     else{
-      setApiError(response.error)
-     }
-      setloading(false)
+
+      toast.success(" Registered Successfully!");  
+      navigate("/login");
+    } else {
+      setApiError(response.error);
+      toast.error(response.error || " Registration Failed"); 
+    }
+    setloading(false);
     console.log(userData);
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl py-10 px-6 w-full max-w-5xl">
-      <h1 className="text-4xl font-bold mb-8 text-center">Register Now</h1>
+    <div className="bg-white rounded-2xl shadow-2xl py-10 mb-6 mt-5 px-6 w-full max-w-5xl">
+      <h1 className="text-4xl font-bold text-[#006d77] mb-8 text-center">
+        Register Now
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="flex justify-center">
           <img
-            src="/src/assets/Reset password-amico.png"
+            src={registeres}
             alt="register"
             className="w-3/4 max-w-sm mx-auto"
           />
@@ -126,19 +124,22 @@ export default function Register() {
             </Select>
           </div>
 
-          <Button isLoading={loading} type="submit" className="mt-4">
+          <Button isLoading={loading} type="submit" className="mt-4 bg-[#006d77] text-white">
             Register
           </Button>
-           <div>
-            If you have account please <Link className="text-blue-600 font-bold" to={'/login'}>
-            Sign Up
+
+          <div>
+            If you have account please{" "}
+            <Link className="text-[#0f172a] font-bold" to={"/login"}>
+              Sign In
             </Link>
           </div>
-          {apiError &&
-          <span className="text-center text-red-800">
-            {apiError}
-          </span>
-          }
+
+          {apiError && (
+            <span className="text-center font-bold text-4xl text-red-800">
+              {apiError}
+            </span>
+          )}
         </form>
       </div>
     </div>

@@ -26,7 +26,7 @@ export default function PostDetailsPages() {
    return (
       <>
         
-        <div className="w-4/6 mx-auto py-5">
+        <div className=" w-full md:w-4/6  mx-auto py-5">
           {post ? <PostCard post={post}
           
           commentLimit={post.comments.length}
